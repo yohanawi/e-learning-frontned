@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+    <!-- Home Page -->
+    <url>
+        <loc>https://italyumaacademy.com/</loc>
+        <lastmod>2026-01-22</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- About Us -->
+    <url>
+        <loc>https://italyumaacademy.com/about-us</loc>
+        <lastmod>2026-01-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Courses -->
+    <url>
+        <loc>https://italyumaacademy.com/courses</loc>
+        <lastmod>2026-01-22</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Blogs -->
+    <url>
+        <loc>https://italyumaacademy.com/blogs</loc>
+        <lastmod>2026-01-22</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Contact Us -->
+    <url>
+        <loc>https://italyumaacademy.com/contact-us</loc>
+        <lastmod>2026-01-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Login -->
+    <url>
+        <loc>https://italyumaacademy.com/login</loc>
+        <lastmod>2026-01-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- Register -->
+    <url>
+        <loc>https://italyumaacademy.com/register</loc>
+        <lastmod>2026-01-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- My Account -->
+    <url>
+        <loc>https://italyumaacademy.com/my-account</loc>
+        <lastmod>2026-01-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <!-- Terms and Conditions -->
+    <url>
+        <loc>https://italyumaacademy.com/terms-and-conditions</loc>
+        <lastmod>2026-01-22</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.4</priority>
+    </url>
+
+    <!-- Privacy Policy -->
+    <url>
+        <loc>https://italyumaacademy.com/privacy-policy</loc>
+        <lastmod>2026-01-22</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.4</priority>
+    </url>
+
+    <!-- Sitemap Page -->
+    <url>
+        <loc>https://italyumaacademy.com/sitemap</loc>
+        <lastmod>2026-01-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+</urlset>

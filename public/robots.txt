@@ -1,0 +1,16 @@
+# robots.txt for Italy UMA Academy
+# https://italyumaacademy.com/robots.txt
+
+User-agent: *
+Allow: /
+
+# Disallow admin and user-specific pages
+Disallow: /my-account
+Disallow: /payment/
+Disallow: /lessons/
+
+# Sitemap location
+Sitemap: https://italyumaacademy.com/sitemap.xml
+
+# Crawl-delay for bots
+Crawl-delay: 10
