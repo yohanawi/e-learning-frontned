@@ -50,8 +50,9 @@ export default function LatestNewsSection({ blogs }: LatestNewsSectionProps) {
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.95 }}>
                         <Link href="/blogs"
-                            className="w-[7.8rem] px-4 py-2 border-[#4783F3] border-2 rounded-3xl text-[#4783F3] hover:bg-[#4783F3] hover:text-white transition flex items-center gap-2">
-                            View All <CircleArrowUp className="w-5 h-5 rotate-45" />
+                            className="w-[7.8rem] px-4 group py-2 border-[#4783F3] border-2 rounded-3xl text-[#4783F3] hover:bg-[#4783F3] hover:text-white transition-colors duration-300 flex items-center gap-2">
+                            View All
+                            <CircleArrowUp className="w-5 h-5 transition-transform duration-300 rotate-45 group-hover:rotate-90" />
                         </Link>
                     </motion.div>
                 </motion.div>
@@ -76,7 +77,9 @@ export default function LatestNewsSection({ blogs }: LatestNewsSectionProps) {
                     className="swiper-container">
                     {items.map((item, index) => {
                         const imageUrl = item.thumbnail
-                            ? `${backendOrigin}/storage/${item.thumbnail}`
+                            ? item.thumbnail.startsWith("http")
+                                ? item.thumbnail
+                                : `${backendOrigin}/${item.thumbnail.replace(/^\/+/, "")}`
                             : "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&h=600&fit=crop";
 
                         return (
@@ -101,17 +104,15 @@ export default function LatestNewsSection({ blogs }: LatestNewsSectionProps) {
                                         <div className="flex items-center justify-between px-4 pb-2">
                                             <p className="mt-2 text-[#8F8F8F] flex items-center gap-2">
                                                 <Clock className="w-4 text-[#F9A134]" />
-                                                {item.published_date || ""}
+                                                {item.published_date ? new Date(item.published_date).toLocaleDateString("en-GB") : ""}
                                             </p>
                                         </div>
                                     </Link>
                                 </motion.div>
                             </SwiperSlide>
-
                         )
                     })}
                 </Swiper>
-
                 {/* Navigation Buttons */}
                 <div className="flex justify-between gap-4 mt-6">
                     <button className="swiper-prev px-3 py-1 bg-[#4783F3] text-white rounded-full flex items-center gap-1">
@@ -122,7 +123,6 @@ export default function LatestNewsSection({ blogs }: LatestNewsSectionProps) {
                         Next <CircleArrowRight className="w-5 h-5" />
                     </button>
                 </div>
-
             </div>
         </section>
     );

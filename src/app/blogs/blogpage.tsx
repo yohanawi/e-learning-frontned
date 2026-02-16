@@ -164,10 +164,23 @@ export default function BlogsPage() {
                             </div>
                         </div>
                     ) : blogs.length === 0 ? (
-                        <div className="py-20 text-center">
-                            <p className="text-2xl text-gray-400">No blogs found</p>
+                        <div className="flex flex-col items-center justify-center py-24 text-center">
+                            <div className="flex items-center justify-center w-24 h-24 mb-6 rounded-full bg-gradient-to-br from-blue-100 via-purple-100 to-blue-50">
+                                <FiSearch className="w-12 h-12 text-blue-600" />
+                            </div>
+                            <p className="flex items-center gap-2 mb-2 text-3xl font-semibold text-gray-500">
+                                <FiGrid className="inline-block text-blue-400 w-7 h-7" />
+                                No blogs found
+                            </p>
+                            <p className="mb-4 text-gray-400">
+                                We couldn't find any articles matching your search.
+                            </p>
                             {searchQuery && (
-                                <button onClick={() => { setSearchQuery(""); setCurrentPage(1); }} className="mt-4 text-blue-600 underline hover:text-blue-700">
+                                <button
+                                    onClick={() => { setSearchQuery(""); setCurrentPage(1); }}
+                                    className="inline-flex items-center gap-2 px-4 py-2 mt-2 font-medium text-blue-700 transition-all bg-blue-100 rounded-lg hover:bg-blue-200"
+                                >
+                                    <FiList className="w-5 h-5" />
                                     Clear search
                                 </button>
                             )}

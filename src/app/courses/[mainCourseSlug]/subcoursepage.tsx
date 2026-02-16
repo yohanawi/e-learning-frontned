@@ -15,7 +15,8 @@ export default function MainCourseDetailPage() {
 
     const [mainCourse, setMainCourse] = useState<MainCourseDetail | null>(null);
     const [loading, setLoading] = useState(true);
-    const [isVisible, setIsVisible] = useState(false);
+    const [isVisible, setIsVisible] = useState(true); // true = grid view, false = list view
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
         if (slug) {
@@ -111,6 +112,7 @@ export default function MainCourseDetailPage() {
                                         className={`p-2 rounded ${isVisible ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'} transition-colors`}
                                         aria-label="Grid view"
                                         onClick={() => setIsVisible(true)}
+                                        title="Grid view"
                                     >
                                         <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                                             <rect x="3" y="3" width="7" height="7" rx="2" />
@@ -124,6 +126,7 @@ export default function MainCourseDetailPage() {
                                         className={`p-2 rounded ${!isVisible ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'} transition-colors`}
                                         aria-label="List view"
                                         onClick={() => setIsVisible(false)}
+                                        title="List view"
                                     >
                                         <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                                             <rect x="4" y="5" width="16" height="3" rx="1.5" />
@@ -132,7 +135,7 @@ export default function MainCourseDetailPage() {
                                         </svg>
                                     </button>
                                 </div>
-                                {mainCourse.sub_courses.length} {mainCourse.sub_courses.length === 1 ? 'course' : 'courses'} available
+                                {mainCourse.sub_courses.filter(course => course.title.toLowerCase().includes(searchQuery.toLowerCase())).length} {mainCourse.sub_courses.filter(course => course.title.toLowerCase().includes(searchQuery.toLowerCase())).length === 1 ? 'course' : 'courses'} {searchQuery && 'found'}
                             </div>
                             <form className="w-full max-w-xs" onSubmit={e => { e.preventDefault(); }}>
                                 <div className="relative">
@@ -142,6 +145,8 @@ export default function MainCourseDetailPage() {
                                         placeholder="Search courses..."
                                         className="w-full px-4 py-2 pr-10 text-gray-900 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                                         autoComplete="off"
+                                        value={searchQuery}
+                                        onChange={(e) => setSearchQuery(e.target.value)}
                                     />
                                     <svg
                                         className="absolute w-5 h-5 text-gray-400 right-3 top-2.5 pointer-events-none"
@@ -156,61 +161,157 @@ export default function MainCourseDetailPage() {
                                 </div>
                             </form>
                         </div>
-                        {/* Sub Courses Grid */}
+                        {/* Sub Courses Grid/List */}
 
                         <div className="mx-auto my-10">
-                            {mainCourse.sub_courses.length === 0 ? (
-                                <div className="py-12 text-center">
-                                    <BookOpen className="w-16 h-16 mx-auto mb-4 text-gray-400" />
-                                    <p className="text-xl text-gray-600">No courses available yet. Check back soon!</p>
-                                </div>
-                            ) : (
-                                <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
-                                    {mainCourse.sub_courses.map((subCourse) => (
-                                        <Link
-                                            key={subCourse.id}
-                                            href={`/courses/${mainCourse.slug}/${subCourse.id}`}
-                                            className="flex flex-col overflow-hidden transition-all duration-300 bg-white rounded-lg shadow-md hover:shadow-2xl hover:-translate-y-2 group"
-                                        >
-                                            {/* Thumbnail */}
-                                            <div className="relative h-56 overflow-hidden bg-gray-200">
-                                                {subCourse.thumbnail ? (
-                                                    <img
-                                                        src={subCourse.thumbnail}
-                                                        alt={subCourse.title}
-                                                        className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
-                                                    />
-                                                ) : (
-                                                    <div className="flex items-center justify-center w-full h-full bg-gradient-to-br from-blue-400 to-blue-600">
-                                                        <BookOpen className="w-16 h-16 text-white opacity-50" />
+                            {(() => {
+                                // Filter courses based on search query
+                                const filteredCourses = mainCourse.sub_courses.filter(course =>
+                                    course.title.toLowerCase().includes(searchQuery.toLowerCase())
+                                );
+
+                                if (filteredCourses.length === 0) {
+                                    return (
+                                        <div className="py-12 text-center">
+                                            <BookOpen className="w-16 h-16 mx-auto mb-4 text-gray-400" />
+                                            <p className="text-xl text-gray-600">
+                                                {searchQuery ? `No courses found matching "${searchQuery}"` : 'No courses available yet. Check back soon!'}
+                                            </p>
+                                        </div>
+                                    );
+                                }
+
+                                // Grid View
+                                if (isVisible) {
+                                    return (
+                                        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+                                            {filteredCourses.map((subCourse) => (
+                                                <Link
+                                                    key={subCourse.id}
+                                                    href={`/courses/${mainCourse.slug}/${subCourse.id}`}
+                                                    className="flex flex-col overflow-hidden transition-all duration-300 bg-white rounded-lg shadow-md hover:shadow-2xl hover:-translate-y-2 group"
+                                                >
+                                                    {/* Thumbnail */}
+                                                    <div className="relative h-56 overflow-hidden bg-gray-200">
+                                                        {subCourse.thumbnail ? (
+                                                            <img
+                                                                src={subCourse.thumbnail}
+                                                                alt={subCourse.title}
+                                                                className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
+                                                            />
+                                                        ) : (
+                                                            <div className="flex items-center justify-center w-full h-full bg-gradient-to-br from-blue-400 to-blue-600">
+                                                                <BookOpen className="w-16 h-16 text-white opacity-50" />
+                                                            </div>
+                                                        )}
+                                                        <div className="absolute px-3 py-1 rounded-full top-4 left-4 bg-black/60 backdrop-blur-sm">
+                                                            <span className="text-xs font-semibold text-white capitalize">
+                                                                {subCourse.level}
+                                                            </span>
+                                                        </div>
                                                     </div>
-                                                )}
-                                                <div className="absolute px-3 py-1 rounded-full top-4 left-4 bg-black/60 backdrop-blur-sm">
-                                                    <span className="text-xs font-semibold text-white capitalize">
-                                                        {subCourse.level}
-                                                    </span>
-                                                </div>
-                                            </div>
 
-                                            {/* Content */}
-                                            <div className="flex flex-col flex-grow px-6 pt-4">
-                                                <h3 className="mb-2 text-xl font-bold text-gray-900 transition-colors group-hover:text-blue-600">
-                                                    {subCourse.title}
-                                                </h3>
-                                                <div className="flex items-center justify-between mb-2">
-                                                    {/* Price on the left */}
-                                                    {subCourse.price !== undefined && (
-                                                        <span className="text-lg font-semibold text-blue-600">
-                                                            {subCourse.price === 0 ? 'Free' : `$${subCourse.price}`}
-                                                        </span>
+                                                    {/* Content */}
+                                                    <div className="flex flex-col flex-grow px-6 pt-4">
+                                                        <h3 className="mb-2 text-xl font-bold text-gray-900 transition-colors group-hover:text-blue-600">
+                                                            {subCourse.title}
+                                                        </h3>
+                                                        <div className="flex items-center justify-between mb-2">
+                                                            {/* Price on the left */}
+                                                            {subCourse.price !== undefined && (
+                                                                <span className="text-lg font-semibold text-blue-600">
+                                                                    {subCourse.price === 0 ? 'Free' : `$${subCourse.price}`}
+                                                                </span>
+                                                            )}
+
+                                                            <div className="flex items-center justify-between border-t border-gray-100">
+                                                                <div className="flex items-center space-x-4 text-sm text-gray-500">
+                                                                    {subCourse.duration_hours && (
+                                                                        <div className="flex items-center space-x-1">
+                                                                            <Clock className="w-4 h-4" />
+                                                                            <span>{subCourse.duration_hours}h</span>
+                                                                        </div>
+                                                                    )}
+                                                                    {subCourse.lessons_count !== undefined && (
+                                                                        <div className="flex items-center space-x-1">
+                                                                            <BookOpen className="w-4 h-4" />
+                                                                            <span>{subCourse.lessons_count} lessons</span>
+                                                                        </div>
+                                                                    )}
+                                                                </div>
+
+                                                                {subCourse.students_count !== undefined && subCourse.students_count > 0 && (
+                                                                    <div className="flex items-center space-x-1 text-sm text-gray-500">
+                                                                        <Users className="w-4 h-4" />
+                                                                        <span>{subCourse.students_count}</span>
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex w-full py-2">
+                                                            {subCourse.is_bought ? (
+                                                                <button
+                                                                    className="w-full px-4 py-2 font-semibold text-white transition-colors bg-blue-600 rounded hover:bg-blue-700"
+                                                                    type="button"
+                                                                >
+                                                                    View
+                                                                </button>
+                                                            ) : (
+                                                                <button
+                                                                    className="w-full px-4 py-2 font-semibold text-black transition-colors bg-[#f9a134] rounded hover:bg-yellow-400"
+                                                                    type="button"
+                                                                >
+                                                                    Buy this course
+                                                                </button>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    );
+                                }
+
+                                // List View
+                                return (
+                                    <div className="space-y-4">
+                                        {filteredCourses.map((subCourse) => (
+                                            <Link
+                                                key={subCourse.id}
+                                                href={`/courses/${mainCourse.slug}/${subCourse.id}`}
+                                                className="flex flex-col overflow-hidden transition-all duration-300 bg-white rounded-lg shadow-md hover:shadow-xl sm:flex-row group"
+                                            >
+                                                {/* Thumbnail */}
+                                                <div className="relative flex-shrink-0 w-full h-48 overflow-hidden bg-gray-200 sm:w-80">
+                                                    {subCourse.thumbnail ? (
+                                                        <img
+                                                            src={subCourse.thumbnail}
+                                                            alt={subCourse.title}
+                                                            className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
+                                                        />
+                                                    ) : (
+                                                        <div className="flex items-center justify-center w-full h-full bg-gradient-to-br from-blue-400 to-blue-600">
+                                                            <BookOpen className="w-16 h-16 text-white opacity-50" />
+                                                        </div>
                                                     )}
+                                                    <div className="absolute px-3 py-1 rounded-full top-4 left-4 bg-black/60 backdrop-blur-sm">
+                                                        <span className="text-xs font-semibold text-white capitalize">
+                                                            {subCourse.level}
+                                                        </span>
+                                                    </div>
+                                                </div>
 
-                                                    <div className="flex items-center justify-between border-t border-gray-100">
-                                                        <div className="flex items-center space-x-4 text-sm text-gray-500">
+                                                {/* Content */}
+                                                <div className="flex flex-col justify-between flex-grow p-6">
+                                                    <div>
+                                                        <h3 className="mb-3 text-2xl font-bold text-gray-900 transition-colors group-hover:text-blue-600">
+                                                            {subCourse.title}
+                                                        </h3>
+                                                        <div className="flex flex-wrap items-center gap-4 mb-4 text-sm text-gray-500">
                                                             {subCourse.duration_hours && (
                                                                 <div className="flex items-center space-x-1">
                                                                     <Clock className="w-4 h-4" />
-                                                                    <span>{subCourse.duration_hours}h</span>
+                                                                    <span>{subCourse.duration_hours} hours</span>
                                                                 </div>
                                                             )}
                                                             {subCourse.lessons_count !== undefined && (
@@ -219,38 +320,44 @@ export default function MainCourseDetailPage() {
                                                                     <span>{subCourse.lessons_count} lessons</span>
                                                                 </div>
                                                             )}
+                                                            {subCourse.students_count !== undefined && subCourse.students_count > 0 && (
+                                                                <div className="flex items-center space-x-1">
+                                                                    <Users className="w-4 h-4" />
+                                                                    <span>{subCourse.students_count} students</span>
+                                                                </div>
+                                                            )}
                                                         </div>
-
-                                                        {subCourse.students_count !== undefined && subCourse.students_count > 0 && (
-                                                            <div className="flex items-center space-x-1 text-sm text-gray-500">
-                                                                <Users className="w-4 h-4" />
-                                                                <span>{subCourse.students_count}</span>
-                                                            </div>
+                                                    </div>
+                                                    <div className="flex flex-wrap items-center justify-between gap-4">
+                                                        {subCourse.price !== undefined && (
+                                                            <span className="text-2xl font-bold text-blue-600">
+                                                                {subCourse.price === 0 ? 'Free' : `$${subCourse.price}`}
+                                                            </span>
                                                         )}
+                                                        <div className="flex gap-2">
+                                                            {subCourse.is_bought ? (
+                                                                <button
+                                                                    className="px-6 py-2 font-semibold text-white transition-colors bg-blue-600 rounded hover:bg-blue-700"
+                                                                    type="button"
+                                                                >
+                                                                    View Course
+                                                                </button>
+                                                            ) : (
+                                                                <button
+                                                                    className="px-6 py-2 font-semibold text-black transition-colors bg-[#f9a134] rounded hover:bg-yellow-400"
+                                                                    type="button"
+                                                                >
+                                                                    Buy this course
+                                                                </button>
+                                                            )}
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div className="flex w-full py-2">
-                                                    {subCourse.is_bought ? (
-                                                        <button
-                                                            className="w-full px-4 py-2 font-semibold text-white transition-colors bg-blue-600 rounded hover:bg-blue-700"
-                                                            type="button"
-                                                        >
-                                                            View
-                                                        </button>
-                                                    ) : (
-                                                        <button
-                                                            className="w-full px-4 py-2 font-semibold text-black transition-colors bg-[#f9a134] rounded hover:bg-yellow-400"
-                                                            type="button"
-                                                        >
-                                                            Buy this course
-                                                        </button>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        </Link>
-                                    ))}
-                                </div>
-                            )}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                );
+                            })()}
                         </div>
                     </div>
                     {/* Right column: 4/12 */}

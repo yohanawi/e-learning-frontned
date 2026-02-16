@@ -76,26 +76,47 @@ export default function TestimonialSection() {
         <section className="relative py-10 overflow-hidden lg:py-20 bg-gradient-to-br from-indigo-100 via-white to-sky-100">
             <div className="relative z-10 px-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 {/* Header Section */}
-                <motion.div className="mb-8 text-center"
-                    initial={{ opacity: 0, y: -30 }}
+                {/* Navigation Controls */}
+                <motion.div className="flex items-center justify-center gap-4 -mt-4 sm:mt-4 sm:gap-6 md:gap-8"
+                    initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}>
-                    <motion.h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#2F2F32] mb-3"
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.2 }}>
-                        What Our Learners Say
-                    </motion.h2>
-                    <motion.p className="mt-3 text-base md:text-lg text-[#7D7E7F] max-w-2xl mx-auto px-4"
-                        initial={{ opacity: 0, y: 20 }}
+                    transition={{ duration: 0.6, delay: 0.8 }}>
+
+                    <motion.button className="p-1 text-white transition-all duration-300 bg-blue-500 rounded-full swiper-prevt hover:bg-blue-600"
+                        whileHover={{ scale: 1.1, rotate: -5 }}
+                        whileTap={{ scale: 0.95 }}>
+                        <CircleArrowLeft className="w-5 h-5 sm:w-8 sm:h-8" />
+                    </motion.button>
+                    <motion.div className="mb-8 text-center"
+                        initial={{ opacity: 0, y: -30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.4 }}>
-                        Real stories from people transforming their Italian skills with Uma.
-                    </motion.p>
+                        transition={{ duration: 0.6 }}>
+
+                        <motion.h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#2F2F32] mb-3"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: 0.2 }}>
+                            What Our Learners Say
+                        </motion.h2>
+                        <motion.p className="mt-3 text-base md:text-lg text-[#7D7E7F] max-w-2xl mx-auto px-4"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: 0.4 }}>
+                            Real stories from people transforming their Italian skills with Uma.
+                        </motion.p>
+                    </motion.div>
+                    <motion.button
+                        className="p-1 text-white transition-all duration-300 bg-blue-500 rounded-full swiper-nextt hover:bg-blue-600"
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        whileTap={{ scale: 0.95 }}>
+                        <CircleArrowRight className="w-5 h-5 sm:w-8 sm:h-8" />
+                    </motion.button>
                 </motion.div>
+
 
                 {/* Swiper Section */}
                 <motion.div
@@ -195,27 +216,6 @@ export default function TestimonialSection() {
                             </SwiperSlide>
                         ))}
                     </Swiper>
-
-                    {/* Navigation Controls */}
-                    <motion.div className="flex items-center justify-center gap-4 -mt-4 sm:mt-4 sm:gap-6 md:gap-8"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.8 }}>
-
-                        <motion.button className="p-1 text-white transition-all duration-300 bg-blue-500 rounded-full swiper-prevt hover:bg-blue-600"
-                            whileHover={{ scale: 1.1, rotate: -5 }}
-                            whileTap={{ scale: 0.95 }}>
-                            <CircleArrowLeft className="w-5 h-5 sm:w-8 sm:h-8" />
-                        </motion.button>
-
-                        <motion.button
-                            className="p-1 text-white transition-all duration-300 bg-blue-500 rounded-full swiper-nextt hover:bg-blue-600"
-                            whileHover={{ scale: 1.1, rotate: 5 }}
-                            whileTap={{ scale: 0.95 }}>
-                            <CircleArrowRight className="w-5 h-5 sm:w-8 sm:h-8" />
-                        </motion.button>
-                    </motion.div>
                 </motion.div>
             </div>
         </section>

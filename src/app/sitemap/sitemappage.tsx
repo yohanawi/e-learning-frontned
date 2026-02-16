@@ -106,14 +106,12 @@ export default function SitemapPage() {
                     {sitemapSections.map((section, sectionIndex) => {
                         const SectionIcon = section.icon;
                         return (
-                            <div
-                                key={sectionIndex}
+                            <div key={sectionIndex}
                                 className="overflow-hidden transition-all duration-300 bg-white border border-gray-100 shadow-lg rounded-2xl hover:shadow-2xl"
                                 style={{
                                     animation: `fadeInUp 0.6s ease-out ${sectionIndex * 100}ms forwards`,
                                     opacity: 0,
-                                }}
-                            >
+                                }}>
                                 {/* Section Header */}
                                 <div className={`bg-gradient-to-r ${section.color} p-6 relative overflow-hidden`}>
                                     <div className="absolute top-0 right-0 w-32 h-32 -mt-16 -mr-16 rounded-full bg-white/10"></div>
@@ -139,31 +137,30 @@ export default function SitemapPage() {
                                                 onMouseLeave={() => setHoveredCard(null)}
                                             >
                                                 <div className={`p-4 rounded-xl border-2 transition-all duration-300 ${hoveredCard === cardKey
-                                                    ? 'border-[#F9A134] bg-gradient-to-r from-orange-50 to-yellow-50 shadow-md transform scale-105'
+                                                    ? 'border-white bg-gradient-to-r from-blue-50 to-blue-50 shadow-md transform scale-105'
                                                     : 'border-gray-200 bg-gray-50 hover:border-gray-300'
                                                     }`}>
                                                     <div className="flex items-start gap-4">
                                                         <div className={`p-2 rounded-lg transition-all duration-300 ${hoveredCard === cardKey
-                                                            ? 'bg-[#F9A134] shadow-lg'
+                                                            ? 'bg-[#1d4dd5] shadow-lg'
                                                             : 'bg-white'
                                                             }`}>
                                                             <LinkIcon className={`w-5 h-5 transition-colors duration-300 ${hoveredCard === cardKey ? 'text-white' : 'text-gray-600'
                                                                 }`} />
                                                         </div>
                                                         <div className="flex-1">
-                                                            <h3 className={`font-semibold mb-1 transition-colors duration-300 flex items-center gap-2 ${hoveredCard === cardKey ? 'text-[#1A2E77]' : 'text-gray-800'
+                                                            <h3 className={`font-semibold mb-1 transition-colors duration-300 flex items-center gap-2 ${hoveredCard === cardKey ? 'text-[#1d4dd5]' : 'text-gray-800'
                                                                 }`}>
                                                                 {link.name}
                                                                 {hoveredCard === cardKey && (
-                                                                    <CheckCircle2 className="w-4 h-4 text-[#F9A134] animate-bounce" />
+                                                                    <CheckCircle2 className="w-4 h-4 text-[#1d4dd5] animate-bounce" />
                                                                 )}
                                                             </h3>
                                                             <p className="text-sm text-gray-600">{link.description}</p>
                                                         </div>
-                                                        <div className={`mt-1 transition-transform duration-300 ${hoveredCard === cardKey ? 'translate-x-2' : ''
-                                                            }`}>
+                                                        <div className={`mt-1 transition-transform duration-300 ${hoveredCard === cardKey ? 'translate-x-2' : ''} `}>
                                                             <svg
-                                                                className={`w-5 h-5 transition-colors duration-300 ${hoveredCard === cardKey ? 'text-[#F9A134]' : 'text-gray-400'
+                                                                className={`w-5 h-5 transition-colors duration-300 ${hoveredCard === cardKey ? 'text-[#1d4dd5]' : 'text-gray-400'
                                                                     }`}
                                                                 fill="none"
                                                                 stroke="currentColor"
@@ -186,49 +183,46 @@ export default function SitemapPage() {
                 {/* Additional Information */}
                 <div className="bg-gradient-to-r from-[#1A2E77] to-[#142254] rounded-2xl shadow-xl p-8 md:p-12 text-white">
                     <div className="grid grid-cols-1 gap-8 text-center md:grid-cols-3">
-                        <div className="space-y-3">
-                            <div className="inline-flex items-center justify-center w-16 h-16 mx-auto border-2 rounded-full bg-white/10 backdrop-blur-sm border-white/20">
-                                <BookOpen className="w-8 h-8 text-[#F9A134]" />
-                            </div>
-                            <h3 className="text-xl font-bold">Quality Courses</h3>
-                            <p className="text-gray-300">
-                                Access video-based learning content designed by experts
-                            </p>
-                        </div>
-                        <div className="space-y-3">
-                            <div className="inline-flex items-center justify-center w-16 h-16 mx-auto border-2 rounded-full bg-white/10 backdrop-blur-sm border-white/20">
-                                <Users className="w-8 h-8 text-[#F9A134]" />
-                            </div>
-                            <h3 className="text-xl font-bold">Expert Instructors</h3>
-                            <p className="text-gray-300">
-                                Learn from experienced professionals in their fields
-                            </p>
-                        </div>
-                        <div className="space-y-3">
-                            <div className="inline-flex items-center justify-center w-16 h-16 mx-auto border-2 rounded-full bg-white/10 backdrop-blur-sm border-white/20">
-                                <Shield className="w-8 h-8 text-[#F9A134]" />
-                            </div>
-                            <h3 className="text-xl font-bold">Secure Platform</h3>
-                            <p className="text-gray-300">
-                                Your data and privacy are protected with industry-standard security
-                            </p>
-                        </div>
+                        {[
+                            {
+                                icon: BookOpen,
+                                title: "Quality Courses",
+                                description: "Access video-based learning content designed by experts"
+                            },
+                            {
+                                icon: Users,
+                                title: "Expert Instructors",
+                                description: "Learn from experienced professionals in their fields"
+                            },
+                            {
+                                icon: Shield,
+                                title: "Secure Platform",
+                                description: "Your data and privacy are protected with industry-standard security"
+                            }
+                        ].map((item, idx) => {
+                            const Icon = item.icon;
+                            return (
+                                <div className="space-y-3" key={item.title}>
+                                    <div className="inline-flex items-center justify-center w-16 h-16 mx-auto border-2 rounded-full bg-white/10 backdrop-blur-sm border-white/20">
+                                        <Icon className="w-8 h-8 text-white" />
+                                    </div>
+                                    <h3 className="text-xl font-bold">{item.title}</h3>
+                                    <p className="text-gray-300">{item.description}</p>
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
 
                 {/* Quick Stats */}
-                <div className="grid grid-cols-2 gap-6 mt-12 md:grid-cols-4">
+                <div className="grid grid-cols-1 gap-6 mt-12 md:grid-cols-3">
                     {[
-                        { number: "100+", label: "Courses", color: "from-blue-500 to-blue-600" },
-                        { number: "1000+", label: "Students", color: "from-purple-500 to-purple-600" },
-                        { number: "50+", label: "Instructors", color: "from-green-500 to-green-600" },
-                        { number: "24/7", label: "Support", color: "from-orange-500 to-orange-600" }
+                        { number: "100+", label: "Courses" },
+                        { number: "1000+", label: "Students" },
+                        { number: "24/7", label: "Support" }
                     ].map((stat, index) => (
-                        <div
-                            key={index}
-                            className="p-6 text-center transition-all duration-300 transform bg-white border border-gray-100 shadow-lg rounded-xl hover:scale-105"
-                        >
-                            <div className={`text-3xl md:text-4xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2`}>
+                        <div key={index} className="p-6 text-center transition-all duration-300 transform bg-white border border-gray-100 shadow-lg rounded-xl hover:scale-105">
+                            <div className={`text-3xl md:text-4xl font-bold text-[#1d4dd5] mb-2`}>
                                 {stat.number}
                             </div>
                             <div className="font-medium text-gray-600">{stat.label}</div>
@@ -246,16 +240,10 @@ export default function SitemapPage() {
                             Join thousands of students learning at their own pace with our video-based courses
                         </p>
                         <div className="flex flex-col justify-center gap-4 sm:flex-row">
-                            <Link
-                                href="/courses"
-                                className="px-8 py-4 bg-gradient-to-r from-[#F9A134] to-[#e8912a] text-white rounded-lg font-semibold hover:from-[#e8912a] hover:to-[#d4882e] transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-                            >
+                            <Link href="/courses" className="px-8 py-4 bg-gradient-to-r from-[#F9A134] to-[#e8912a] text-white rounded-lg font-semibold hover:from-[#e8912a] hover:to-[#d4882e] transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
                                 Browse Courses
                             </Link>
-                            <Link
-                                href="/register"
-                                className="px-8 py-4 bg-gradient-to-r from-[#1A2E77] to-[#142254] text-white rounded-lg font-semibold hover:from-[#142254] hover:to-[#0d1640] transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-                            >
+                            <Link href="/register" className="px-8 py-4 bg-gradient-to-r from-[#1A2E77] to-[#142254] text-white rounded-lg font-semibold hover:from-[#142254] hover:to-[#0d1640] transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
                                 Create Account
                             </Link>
                         </div>

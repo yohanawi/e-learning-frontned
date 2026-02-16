@@ -9,8 +9,7 @@ export const metadata: Metadata = {
         template: "%s | Italy Uma Academy",
     },
 
-    description:
-        "Italy Uma Academy is a leading training center offering specialized courses and certifications in Italy. Contact us for admissions, course details, and partnership opportunities.",
+    description: "Italy Uma Academy is a leading training center offering specialized courses and certifications in Italy.",
 
     alternates: {
         canonical: "https://italyumaacademy.com/contact-us",
@@ -36,7 +35,7 @@ export const metadata: Metadata = {
 
     openGraph: {
         title: "Contact Italy Uma Academy | Authorized Training Center",
-        description: "Italy Uma Academy is a leading training center offering specialized courses and certifications in Italy. Contact us for admissions, course details, and partnership opportunities.",
+        description: "Italy Uma Academy is a leading training center offering specialized courses and certifications in Italy.",
         url: "https://italyumaacademy.com/contact-us",
         type: "website",
         images: [
@@ -53,11 +52,11 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         site: "@italyumaacademy",
         title: "Contact Italy Uma Academy | Authorized Training Center",
-        description: "Italy Uma Academy is a leading training center offering specialized courses and certifications in Italy. Contact us for admissions, course details, and partnership opportunities.",
+        description: "Italy Uma Academy is a leading training center offering specialized courses and certifications in Italy.",
         images: [
             "https://italyumaacademy.com/assets/logos/logo.png",
         ],
-    },   
+    },
 };
 
 export default function Page() {

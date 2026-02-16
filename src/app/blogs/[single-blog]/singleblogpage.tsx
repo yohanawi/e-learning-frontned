@@ -1,22 +1,22 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { FiCalendar, FiEye, FiSearch, FiStar, FiClock } from 'react-icons/fi';
+import { ArrowRight, ArrowRightIcon, ChevronRight, Home } from 'lucide-react';
 import { api, Blog, BlogComment } from '@/lib/api';
-import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
-import { FiCalendar, FiUser, FiEye, FiSearch, FiStar, FiClock } from 'react-icons/fi';
+import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { ArrowLeftIcon, ArrowRight, ArrowRightIcon, ChevronRight, Home } from 'lucide-react';
+import Link from 'next/link';
 
 interface SingleBlogPageProps {
     slug: string;
 }
 
 export default function SingleBlogPage({ slug }: SingleBlogPageProps) {
+
     const router = useRouter();
     const { user, token } = useAuth();
-
     const [blog, setBlog] = useState<Blog | null>(null);
     const [latestBlogs, setLatestBlogs] = useState<Blog[]>([]);
     const [comments, setComments] = useState<BlogComment[]>([]);
@@ -37,7 +37,6 @@ export default function SingleBlogPage({ slug }: SingleBlogPageProps) {
         try {
             setLoading(true);
             setError(null);
-            console.log('Fetching blog with slug:', slug);
 
             // Fetch blog and latest blogs first (these don't require auth)
             const [blogData, latestData] = await Promise.all([
@@ -45,7 +44,6 @@ export default function SingleBlogPage({ slug }: SingleBlogPageProps) {
                 api.blogs.getLatest(5),
             ]);
 
-            console.log('Blog data received:', blogData);
             setBlog(blogData);
             setLatestBlogs(latestData.filter((b) => b.slug !== slug));
 
@@ -54,8 +52,7 @@ export default function SingleBlogPage({ slug }: SingleBlogPageProps) {
                 const commentsData = await api.blogs.getComments(slug, token || undefined);
                 setComments(commentsData);
             } catch (commentError: any) {
-                console.log('Comments not available:', commentError.message);
-                setComments([]); // Set empty comments if not available
+                setComments([]);
             }
         } catch (error: any) {
             console.error('Error fetching blog:', error);
@@ -83,7 +80,6 @@ export default function SingleBlogPage({ slug }: SingleBlogPageProps) {
             setCommentText('');
             setRating(0);
         } catch (error) {
-            console.error('Error submitting comment:', error);
             alert('Failed to submit comment');
         } finally {
             setSubmitting(false);

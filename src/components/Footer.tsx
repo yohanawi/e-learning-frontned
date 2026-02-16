@@ -59,12 +59,20 @@ export default function Footer() {
         }
     }, [state.ok]);
 
-    const quickLinks = ["Home", "About Us", "Courses", "Contact Us", "Blogs", "Sitemap"];
+    const quickLinks =
+        [
+            { label: "Home", url: "/" },
+            { label: "About Us", url: "/about-us" },
+            { label: "Courses", url: "/courses" },
+            { label: "Contact Us", url: "/contact-us" },
+            { label: "Blogs", url: "/blogs" },
+            { label: "Sitemap", url: "/sitemap" }
+        ];
 
     const socialLinks = [
-        { Icon: Facebook, colorClass: "hover:bg-blue-600", url: "https://www.facebook.com/yourpage" },
-        { Icon: Instagram, colorClass: "hover:bg-pink-500", url: "https://www.instagram.com/yourprofile" },
-        { Icon: Linkedin, colorClass: "hover:bg-blue-700", url: "https://www.linkedin.com/yourprofile" },
+        { Icon: Facebook, colorClass: "hover:bg-blue-600", url: "#" },
+        { Icon: Instagram, colorClass: "hover:bg-pink-500", url: "#" },
+        { Icon: Linkedin, colorClass: "hover:bg-blue-700", url: "#" },
     ];
 
     return (
@@ -121,14 +129,14 @@ export default function Footer() {
                             </h4>
                             <ul className="grid grid-cols-1 gap-3">
                                 {quickLinks.map((item, index) => (
-                                    <li key={item} className="group"
+                                    <li key={item.url} className="group"
                                         style={{
                                             animation: isVisible ? `slideInLeft 0.5s ease-out ${index * 100}ms forwards` : "none",
                                             opacity: isVisible ? 1 : 0
                                         }}>
-                                        <Link href={`/${item.toLowerCase().replace(/\s/g, "-")}`} className="flex items-center text-gray-200 transition-all duration-300 hover:text-[#F9A134] hover:translate-x-2">
+                                        <Link href={item.url} className="flex items-center text-gray-200 transition-all duration-300 hover:text-[#F9A134] hover:translate-x-2">
                                             <ChevronsRight className="w-4 h-4 mr-2 text-[#F9A134] transition-transform duration-300 group-hover:translate-x-1" />
-                                            <span>{item}</span>
+                                            <span>{item.label}</span>
                                         </Link>
                                     </li>
                                 ))}
@@ -211,7 +219,7 @@ export default function Footer() {
                                 <Link href="/" className="text-[#F9A134] hover:text-[#e8912a] transition-colors duration-300 font-semibold">
                                     Italy UMA Academy
                                 </Link>
-                                . Created by CodeBean Team.
+                                . Created by CodeNova Team.
                             </p>
                             <div className="flex items-center gap-4">
                                 <Link href="/terms-and-conditions" className="hover:text-[#F9A134] transition-all duration-300 hover:underline underline-offset-4">

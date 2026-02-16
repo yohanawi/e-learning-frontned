@@ -55,7 +55,7 @@ export default function NavBar() {
                     </div>
                 </div>
             </div>
-            <nav className="sticky top-0 z-50 bg-white shadow-md">
+            <nav className="sticky top-0 z-40 bg-white shadow-md">
                 <div className="px-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-20">
                         {/* Logo */}

@@ -10,8 +10,7 @@ export const metadata: Metadata = {
         template: "%s | Italy UMA Academy",
     },
 
-    description:
-        "Your privacy is important to us. Learn how we protect your data at Italy UMA Academy.",
+    description: "Discover how Italy UMA Academy safeguards your personal data, ensures GDPR compliance, and empowers your privacy.",
 
     alternates: {
         canonical: "https://italyumaacademy.com/privacy-policy",
@@ -35,7 +34,7 @@ export const metadata: Metadata = {
 
     openGraph: {
         title: "Privacy Policy | Italy UMA Academy",
-        description: "Your privacy is important to us. Learn how we protect your data at Italy UMA Academy.",
+        description: "Discover how Italy UMA Academy safeguards your personal data, ensures GDPR compliance, and empowers your privacy.",
         url: "https://italyumaacademy.com/privacy-policy",
         type: "website",
         images: [
@@ -52,7 +51,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         site: "@italyumaacademy",
         title: "Privacy Policy | Italy UMA Academy",
-        description: "Your privacy is important to us. Learn how we protect your data at Italy UMA Academy.",
+        description: "Discover how Italy UMA Academy safeguards your personal data, ensures GDPR compliance, and empowers your privacy.",
         images: [
             "https://italyumaacademy.com/assets/logos/logo.png",
         ],
@@ -362,7 +361,7 @@ export default function PrivacyPolicyPage() {
                             <p className="leading-relaxed text-gray-700">
                                 If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at:
                             </p>
-                            <div className="bg-gray-50 p-6 rounded-lg border-l-4 border-[#F9A134]">
+                            <div className="bg-gray-50 p-6 rounded-lg border-l-4 border-[#1A2E77]">
                                 <p className="font-semibold text-gray-700">Italy UMA Academy - Data Protection Officer</p>
                                 <p className="text-gray-700">Email: privacy@italyumaacademy.com</p>
                                 <p className="text-gray-700">Phone: +1 (234) 567-890</p>
